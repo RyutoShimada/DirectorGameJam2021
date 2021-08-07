@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5816590357101854729}
   - component: {fileID: 5816590357101854728}
   - component: {fileID: 5816590357101854734}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_hp: 10
   m_damage: 1
   m_speed: 10
-  m_bulletPrefab: {fileID: 7102015497988907395, guid: 73fc6fe55f6cb8248b76a9d69193b02a,
+  m_bulletPrefab: {fileID: 4221840060996775801, guid: 45e79572e2ae83b4aa5f02a34dec58de,
     type: 3}
   m_bulletGeneratePos: {fileID: 5816590357504414424}
   m_operater: 0
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5816590357504414424}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BulletGeneratePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -60,8 +60,8 @@ public class GenerataPlayerPor : MonoBehaviour
     Vector2 Ramdom()
     {
         Vector2 v2;
-        var x = Random.Range(-8.5f, 8.5f);
-        var y = Random.Range(-4.5f, 4.5f);
+        var x = Random.Range(-8.1f, 8.1f);
+        var y = Random.Range(-4.1f, 4.1f);
         v2 = new Vector2(x, y);
         return v2;
     }
