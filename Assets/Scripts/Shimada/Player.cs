@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [SerializeField]
 public enum OperaterState
@@ -13,12 +14,17 @@ public enum OperaterState
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] int m_hp = 10;
+    [SerializeField] int m_maxHp = 10;
+    int m_currentHp = 10;
     [SerializeField] int m_damage = 1;
     [SerializeField] float m_speed = 5f;
 
     [SerializeField] GameObject m_bulletPrefab = null;
     [SerializeField] Transform m_bulletGeneratePos = null;
+
+    [SerializeField] Slider m_hpBar = null;
+    [SerializeField] Transform m_hpBarPos = null;
+    [SerializeField] float m_hpBarPosDirection = 1f;
 
     public OperaterState m_operater = OperaterState.FirstPlayer;
     Rigidbody2D m_rb2d;
@@ -31,6 +37,9 @@ public class Player : MonoBehaviour
         m_rb2d = GetComponent<Rigidbody2D>();
         m_velo = m_rb2d.velocity;
         m_dir = Vector2.up;
+        m_currentHp = m_maxHp;
+        m_hpBar.value = (float)m_currentHp / m_maxHp;
+        m_hpBarPos.position = transform.position + new Vector3(0, m_hpBarPosDirection, 0);
     }
 
     void FixedUpdate()
@@ -42,6 +51,7 @@ public class Player : MonoBehaviour
     void Update()
     {   
         Fire();
+        m_hpBarPos.position = transform.position + new Vector3(0, m_hpBarPosDirection, 0);
     }
 
     private void Move()
@@ -113,8 +123,6 @@ public class Player : MonoBehaviour
 
     void Fire()
     {
-        
-
         if (m_operater == OperaterState.FirstPlayer)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -134,6 +142,20 @@ public class Player : MonoBehaviour
 
                 Instantiate(m_bulletPrefab, m_bulletGeneratePos.position, m_bulletGeneratePos.rotation);
             }
+        }
+    }
+
+    void Damage(int damageNum)
+    {
+        m_currentHp -= damageNum;
+        m_hpBar.value = (float)m_currentHp / m_maxHp;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Bullet")
+        {
+            Damage(m_damage);
         }
     }
 }
