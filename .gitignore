@@ -73,7 +73,6 @@ ProjectSettings/ClusterInputManager.asset
 ProjectSettings/AudioManager.asset
 Packages/packages-lock.json
 Packages/manifest.json
-ProjectSettings/TagManager.asset
 ProjectSettings/QualitySettings.asset
 ProjectSettings/UnityConnectSettings.asset
 ProjectSettings/TimeManager.asset
