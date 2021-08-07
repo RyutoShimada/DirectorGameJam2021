@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerataPor : MonoBehaviour
+public class GenerataPlayerPor : MonoBehaviour
 {
     [SerializeField] float m_distance;
-    [SerializeField] GameObject m_playerPrefab = null;
+    [SerializeField] GameObject[] m_playerPrefab = null;
 
     public void Start()
     {
@@ -35,13 +35,26 @@ public class GenerataPor : MonoBehaviour
         }
 
         // ok
-        Create(p1);
-        Create(p2);
+        Create(p1, 1);
+        Create(p2, 2);
     }
 
-    void Create(Vector2 v)
+    void Create(Vector2 v, int operater)
     {
-        Instantiate(m_playerPrefab, v, transform.rotation);
+        if (m_playerPrefab.Length == 0) return;
+
+        Player player;
+
+        if (operater == 1)
+        {
+            player = Instantiate(m_playerPrefab[0], v, transform.rotation).GetComponent<Player>();
+            player.m_operater = OperaterState.FirstPlayer;
+        }
+        else
+        {
+            player = Instantiate(m_playerPrefab[1], v, transform.rotation).GetComponent<Player>();
+            player.m_operater = OperaterState.SecondPlayer;
+        }
     }
 
     Vector2 Ramdom()
