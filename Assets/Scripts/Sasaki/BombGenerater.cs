@@ -57,7 +57,9 @@ public class BombGenerater : MonoBehaviour
 
     private void Update()
     {
-        if(m_bombFlg == true)
+        if (!GameManager.Instance.m_isGame) return;
+
+        if (m_bombFlg == true)
         {
             StartCoroutine(BombUpdater());
             m_bombFlg = false;

@@ -14,9 +14,9 @@ public enum OperaterState
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] int m_maxHp = 10;
-    public int m_currentHp = 10;
-    [SerializeField] int m_damage = 1;
+    [SerializeField] float m_maxHp = 10;
+    public float m_currentHp = 10;
+    [SerializeField] float m_damage = 1f;
     [SerializeField] float m_speed = 5f;
 
     [SerializeField] GameObject m_bulletPrefab = null;
@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager.Instance.m_isGame) return;
         if (!m_canMove) return;
         Move();
     }
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.Instance.m_isGame) return;
         if (!m_canMove) return;
         Fire();
         UpdateHpBarPosition();
@@ -141,7 +143,6 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.RightControl))
             {
-                Debug.Log($"{m_operater} : Fire!");
                 if (!m_bulletPrefab) return;
 
                 Instantiate(m_bulletPrefab, m_bulletGeneratePos.position, m_bulletGeneratePos.rotation);
@@ -158,7 +159,7 @@ public class Player : MonoBehaviour
         m_canMove = canMove;
     }
 
-    void Damage(int damageNum)
+    void Damage(float damageNum)
     {
         m_currentHp -= damageNum;
         m_hpBar.value = (float)m_currentHp / m_maxHp;
@@ -167,9 +168,9 @@ public class Player : MonoBehaviour
         {
             if (m_currentHp + 1 < m_HPCounts.Length)
             {
-                m_HPCounts[m_currentHp + 1].gameObject.SetActive(false);
+                m_HPCounts[(int)m_currentHp + 1].gameObject.SetActive(false);
             }
-            m_HPCounts[m_currentHp].gameObject.SetActive(true);
+            m_HPCounts[(int)m_currentHp].gameObject.SetActive(true);
         }
 
         if (m_currentHp <= 0)
@@ -185,6 +186,8 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!GameManager.Instance.m_isGame) return;
+
         if (collision.collider.tag == "Bullet")
         {
             Damage(m_damage);

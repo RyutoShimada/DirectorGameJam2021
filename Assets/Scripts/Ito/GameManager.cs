@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject[] m_syousya;
 
+    [SerializeField] GameObject[] m_syousyaImages;
+
     [SerializeField] BombGenerater bombGenerater;
 
     Player[] m_players;
@@ -112,10 +114,12 @@ public class GameManager : MonoBehaviour
         if (m_players[0].m_currentHp > m_players[1].m_currentHp)
         {
             m_syousya[0].SetActive(true);
+            m_syousyaImages[1].SetActive(true);
         }
         else if (m_players[0].m_currentHp < m_players[1].m_currentHp)
         {
             m_syousya[1].SetActive(true);
+            m_syousyaImages[0].SetActive(true);
         }
         else
         {
