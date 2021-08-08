@@ -15,7 +15,7 @@ public enum OperaterState
 public class Player : MonoBehaviour
 {
     [SerializeField] int m_maxHp = 10;
-    int m_currentHp = 10;
+    public int m_currentHp = 10;
     [SerializeField] int m_damage = 1;
     [SerializeField] float m_speed = 5f;
 
