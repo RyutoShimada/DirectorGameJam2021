@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] int m_playercount;
     /// <summary>カウントダウンのイメージ配列 </summary>
     [SerializeField] Image[] m_images;
+    /// <summary>リザルトイメージ</summary>
+    [SerializeField] Image m_result;
 
     public void GameOver()
     {
@@ -70,6 +72,7 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(m_timerText);
                 m_countDownText.text = "終了";
+                StartCoroutine(Coroutineresult(2));
 
             }
 
@@ -113,6 +116,21 @@ public class GameManager : MonoBehaviour
         //    //item,CanMove(true);
         //}
     }
+
+    IEnumerator Coroutineresult(int WaitSeconds)
+    {
+        for( int i = WaitSeconds; i >= 0; i--)
+        {
+            yield return new WaitForSeconds(1f);
+
+            if( i == 0)
+            {
+                m_result.gameObject.SetActive(true);
+            }
+        }
+
+    }
+
     void mainTime()
     {
         if (m_seconds > 0)
