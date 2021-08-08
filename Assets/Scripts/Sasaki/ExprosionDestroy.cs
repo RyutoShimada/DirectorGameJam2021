@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExprosionDestroy : MonoBehaviour
 {
-    private void AfterExprosion()
+    public void AfterExprosion()
     {
         Destroy(this.gameObject);
     }
