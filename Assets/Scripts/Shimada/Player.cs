@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
     {
         if (m_operater == OperaterState.FirstPlayer)
         {
-            if (Input.GetKeyDown(KeyCode.LeftControl))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 Debug.Log($"{m_operater} : Fire!");
                 if (!m_bulletPrefab) return;
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.RightControl))
+            if (Input.GetKeyDown(KeyCode.RightShift))
             {
                 if (!m_bulletPrefab) return;
 
