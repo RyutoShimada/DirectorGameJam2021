@@ -53,12 +53,12 @@ public class GenerataPlayerPor : MonoBehaviour
         if (operater == 1)
         {
             player = Instantiate(m_playerPrefab[0], v, transform.rotation);
-            player.GetComponent<Player>().m_operater = OperaterState.FirstPlayer;
+            player.transform.Find("Player1Controller").GetComponent<Player>().m_operater = OperaterState.FirstPlayer;
         }
         else
         {
             player = Instantiate(m_playerPrefab[1], v, transform.rotation);
-            player.GetComponent<Player>().m_operater = OperaterState.SecondPlayer;
+            player.transform.Find("Player2Controller").GetComponent<Player>().m_operater = OperaterState.SecondPlayer;
         }
 
         return player;

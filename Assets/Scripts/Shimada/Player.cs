@@ -15,7 +15,7 @@ public enum OperaterState
 public class Player : MonoBehaviour
 {
     [SerializeField] int m_maxHp = 10;
-    int m_currentHp = 10;
+    public int m_currentHp = 10;
     [SerializeField] int m_damage = 1;
     [SerializeField] float m_speed = 5f;
 
@@ -162,11 +162,20 @@ public class Player : MonoBehaviour
     {
         m_currentHp -= damageNum;
         m_hpBar.value = (float)m_currentHp / m_maxHp;
-        if (m_currentHp + 1 < m_HPCounts.Length)
+
+        if (m_currentHp >= 0)
         {
-            m_HPCounts[m_currentHp + 1].gameObject.SetActive(false);
+            if (m_currentHp + 1 < m_HPCounts.Length)
+            {
+                m_HPCounts[m_currentHp + 1].gameObject.SetActive(false);
+            }
+            m_HPCounts[m_currentHp].gameObject.SetActive(true);
         }
-        m_HPCounts[m_currentHp].gameObject.SetActive(true);
+
+        if (m_currentHp <= 0)
+        {
+            GameManager.Instance.GameOver();
+        }
     }
 
     void UpdateHpBarPosition()

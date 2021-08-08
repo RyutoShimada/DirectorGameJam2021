@@ -12,53 +12,45 @@ public class GameManager : MonoBehaviour
 
     /// <summary>時間経過 </summary>
     private int counter;
-    /// <summary>制限時間内に勝敗が決まらなかったときに出るテキスト</summary>
-    [SerializeField] Text m_drawText;
-    /// <summary>勝敗 </summary>
-    [SerializeField] Text m_winne;
     /// <summary>制限時間</summary>
     [SerializeField] Text m_timerText;
-    /// <summary>最初のカウントダウン</summary>
-    [SerializeField] Text m_countDownText;
     /// <summary>秒数</summary>
     [SerializeField] float m_seconds = 0;
     /// <summary>分数</summary>
     [SerializeField] int m_minutes = 2;
     /// <summary>ゲームオブジェクト参照 </summary>
-    [SerializeField] GameObject[] Generate;
+    [SerializeField] GenerataPlayerPor m_generataPlayerPor = null;
     /// <summary>プレイヤー配列</summary>
-    Player[] m_players;
+    GameObject[] m_playersObj;
     [SerializeField] int m_playercount;
     /// <summary>カウントダウンのイメージ配列 </summary>
     [SerializeField] Image[] m_images;
     /// <summary>リザルトイメージ</summary>
-    [SerializeField] Image m_result;
+    [SerializeField] GameObject m_result;
+
+    [SerializeField] Image[] m_syousya;
+
+    [SerializeField] BombGenerater bombGenerater;
+
+    Player[] m_players;
+
+    bool m_gameEnd = false;
 
     public void GameOver()
     {
-        //if (player[0],m_currenhp > player[1],m_currenhp)
-        //{
-        //    m_winne.text = "Player1勝利";
-        //}
-        //else if (player[0],m_currenhp < player[1],m_currenhp)
-        //{
-        //    m_winne.text = "Playe2勝利";
-        //}
-        //else
-        //{
-        //    m_drawText.text = "引き分け";
-        //}
+        m_isGame = false;
+        m_gameEnd = true;
     }
-
-
-
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(CoroutineGameStart(5));
-        m_drawText.enabled = false;
-        // Player[] playe = Generata(2);
+        m_playersObj = m_generataPlayerPor.Generater(m_playercount);
+        m_players = new Player[m_playersObj.Length];
+
+        m_players[0] = m_playersObj[0].transform.Find("Player1Controller").GetComponent<Player>();
+        m_players[1] = m_playersObj[1].transform.Find("Player2Controller").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -67,19 +59,17 @@ public class GameManager : MonoBehaviour
         if (m_isGame == true)
         {
             mainTime();
+        }
 
-            if (m_isGame == false)
-            {
-                Destroy(m_timerText);
-                m_countDownText.text = "終了";
-                StartCoroutine(Coroutineresult(2));
-
-            }
-
-
+        if (m_gameEnd == true)
+        {
+            
+            Destroy(m_timerText);
+            Coroutineresult();
         }
 
     }
+
     IEnumerator CoroutineGameStart(int waitSeconds)
     {
         for (int i = waitSeconds; i >= 0; i--)
@@ -88,7 +78,6 @@ public class GameManager : MonoBehaviour
 
             if (i != 0)
             {
-                m_countDownText.text = i.ToString();
                 m_images[i].gameObject.SetActive(true);
 
 
@@ -102,33 +91,37 @@ public class GameManager : MonoBehaviour
             else
             {
                 m_images[i + 1].gameObject.SetActive(false);
-                m_countDownText.text = "はじめ！";
                 m_images[i].gameObject.SetActive(true);
                 yield return new WaitForSeconds(0.5f);
                 m_images[i].gameObject.SetActive(false);
-                m_countDownText.text = "";
             }
         }
         this.m_isGame = true;
 
-        //foreach (var item in m_players)
-        //{
-        //    //item,CanMove(true);
-        //}
+        bombGenerater.StartGenerater();
+
+        foreach (var item in m_players)
+        {
+            item.gameObject.GetComponent<Player>().CanMove(true);
+        }
     }
 
-    IEnumerator Coroutineresult(int WaitSeconds)
+    void Coroutineresult()
     {
-        for( int i = WaitSeconds; i >= 0; i--)
+        m_result.SetActive(true);
+
+        if (m_players[0].m_currentHp > m_players[1].m_currentHp)
         {
-            yield return new WaitForSeconds(1f);
-
-            if( i == 0)
-            {
-                m_result.gameObject.SetActive(true);
-            }
+            m_images[0].gameObject.SetActive(true);
         }
-
+        else if (m_players[0].m_currentHp < m_players[1].m_currentHp)
+        {
+            m_images[1].gameObject.SetActive(true);
+        }
+        else
+        {
+            m_images[3].gameObject.SetActive(true);
+        }
     }
 
     void mainTime()
@@ -150,7 +143,6 @@ public class GameManager : MonoBehaviour
                 m_seconds = 0;
                 m_isGame = false;
                 Debug.Log("TimeUp!");
-
             }
         }
         if (m_timerText != null)
