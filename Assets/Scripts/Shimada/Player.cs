@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     [SerializeField] Transform m_hpBarPos = null;
     [SerializeField] float m_hpBarPosDirection = 1f;
 
+    [SerializeField] Image[] m_HPCounts = null;
+
     public OperaterState m_operater = OperaterState.FirstPlayer;
     Rigidbody2D m_rb2d;
     Vector2 m_dir;
@@ -160,6 +162,11 @@ public class Player : MonoBehaviour
     {
         m_currentHp -= damageNum;
         m_hpBar.value = (float)m_currentHp / m_maxHp;
+        if (m_currentHp + 1 < m_HPCounts.Length)
+        {
+            m_HPCounts[m_currentHp + 1].gameObject.SetActive(false);
+        }
+        m_HPCounts[m_currentHp].gameObject.SetActive(true);
     }
 
     void UpdateHpBarPosition()

@@ -575,10 +575,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4546330546392268868, guid: 634d54117230a194f8027e53153c56b1,
+        type: 3}
+      propertyPath: m_hpBarPosDirection
+      value: -1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5679366177066321963, guid: 634d54117230a194f8027e53153c56b1,
         type: 3}
       propertyPath: m_Name
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679366177066321963, guid: 634d54117230a194f8027e53153c56b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5679366177066321964, guid: 634d54117230a194f8027e53153c56b1,
         type: 3}
@@ -674,10 +684,20 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5799579980398749088, guid: 6dfe318a4a4b9ff4ab95d80c37e15c41,
+        type: 3}
+      propertyPath: m_hpBarPosDirection
+      value: -1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5799579981059943961, guid: 6dfe318a4a4b9ff4ab95d80c37e15c41,
         type: 3}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799579981059943961, guid: 6dfe318a4a4b9ff4ab95d80c37e15c41,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5799579981059943966, guid: 6dfe318a4a4b9ff4ab95d80c37e15c41,
         type: 3}
