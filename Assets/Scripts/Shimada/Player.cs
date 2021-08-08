@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
 
         if (m_currentHp <= 0)
         {
-            GameManager.Instance.GameOver();
+            StartCoroutine(GameManager.Instance.GameOver());
         }
     }
 

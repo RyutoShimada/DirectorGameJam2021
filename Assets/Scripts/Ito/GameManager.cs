@@ -40,8 +40,9 @@ public class GameManager : MonoBehaviour
 
     bool m_gameEnd = false;
 
-    public void GameOver()
+    public IEnumerator GameOver()
     {
+        yield return new WaitForSeconds(2f);
         m_isGame = false;
         m_gameEnd = true;
     }
@@ -125,7 +126,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            m_syousya[3].SetActive(true);
+            m_syousya[2].SetActive(true);
         }
     }
 
@@ -149,7 +150,7 @@ public class GameManager : MonoBehaviour
                 m_isGame = false;
                 Debug.Log("TimeUp!");
                 m_sokomade.SetActive(true);
-                GameOver();
+                StartCoroutine(GameOver());
             }
         }
         if (m_timerText != null)

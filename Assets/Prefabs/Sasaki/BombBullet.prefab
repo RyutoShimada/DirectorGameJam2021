@@ -4710,6 +4710,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4887,7 +4888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ff0dabfd05d9f489833f8f93de8225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bulletSpeed: 5
+  m_bulletSpeed: 3
   m_exprosionAnime: {fileID: 6311849342681319029, guid: d19e611d0d31db24ca3a9efef03e7e08,
     type: 3}
   m_bulletDestroySeconds: 2
