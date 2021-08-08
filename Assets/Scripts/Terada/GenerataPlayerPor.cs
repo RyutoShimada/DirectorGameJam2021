@@ -7,7 +7,7 @@ public class GenerataPlayerPor : MonoBehaviour
     [SerializeField] float m_distance;
     [SerializeField] GameObject[] m_playerPrefab = null;
 
-    public void Start()
+    public GameObject[] Generater(int count)
     {
         Vector2 p1 = Vector2.zero;
         Vector2 p2 = Vector2.zero;
@@ -20,6 +20,7 @@ public class GenerataPlayerPor : MonoBehaviour
         if (distance < m_distance)
         {
             // もう一回ランダムな数値を取り直す
+
             while (true)
             {
                 p1 = Ramdom();
@@ -35,26 +36,32 @@ public class GenerataPlayerPor : MonoBehaviour
         }
 
         // ok
-        Create(p1, 1);
-        Create(p2, 2);
+
+        GameObject[] players = new GameObject[count];
+        players[0] = Create(p1, 1);
+        players[1] = Create(p2, 2);
+
+        return players;
     }
 
-    void Create(Vector2 v, int operater)
+    GameObject Create(Vector2 v, int operater)
     {
-        if (m_playerPrefab.Length == 0) return;
+        if (m_playerPrefab.Length == 0) return null;
 
-        Player player;
+        GameObject player;
 
         if (operater == 1)
         {
-            player = Instantiate(m_playerPrefab[0], v, transform.rotation).GetComponent<Player>();
-            player.m_operater = OperaterState.FirstPlayer;
+            player = Instantiate(m_playerPrefab[0], v, transform.rotation);
+            player.GetComponent<Player>().m_operater = OperaterState.FirstPlayer;
         }
         else
         {
-            player = Instantiate(m_playerPrefab[1], v, transform.rotation).GetComponent<Player>();
-            player.m_operater = OperaterState.SecondPlayer;
+            player = Instantiate(m_playerPrefab[1], v, transform.rotation);
+            player.GetComponent<Player>().m_operater = OperaterState.SecondPlayer;
         }
+
+        return player;
     }
 
     Vector2 Ramdom()
@@ -65,10 +72,5 @@ public class GenerataPlayerPor : MonoBehaviour
         v2 = new Vector2(x, y);
         return v2;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
+
