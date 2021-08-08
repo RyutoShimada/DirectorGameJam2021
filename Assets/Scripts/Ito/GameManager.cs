@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     /// <summary>時間経過 </summary>
     private int counter;
     /// <summary>制限時間</summary>
-    [SerializeField] Text m_timerText;
+    //[SerializeField] Text m_timerText;
     /// <summary>秒数</summary>
     [SerializeField] float m_seconds = 0;
     /// <summary>分数</summary>
@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     {
         m_isGame = false;
 
+        m_sokomade.SetActive(true);
+
         foreach (var item in m_players)
         {
             item.gameObject.GetComponent<Player>().CanMove(false);
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        Destroy(m_timerText);
+        //Destroy(m_timerText);
         Coroutineresult();
     }
 
@@ -154,10 +156,11 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(GameOver());
             }
         }
-        if (m_timerText != null)
-        {
-            m_timerText.text = $"{m_minutes.ToString("00")} : {m_seconds.ToString("00")}";
-        }
+
+        //if (m_timerText != null)
+        //{
+        //    m_timerText.text = $"{m_minutes.ToString("00")} : {m_seconds.ToString("00")}";
+        //}
     }
 }
 
