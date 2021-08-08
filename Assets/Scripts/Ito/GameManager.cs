@@ -26,28 +26,20 @@ public class GameManager : MonoBehaviour
     /// <summary>カウントダウンのイメージ配列 </summary>
     [SerializeField] Image[] m_images;
     /// <summary>リザルトイメージ</summary>
-    [SerializeField] Image m_result;
+    [SerializeField] GameObject m_result;
 
     [SerializeField] Image[] m_syousya;
 
+    [SerializeField] BombGenerater bombGenerater;
+
     Player[] m_players;
+
+    bool m_gameEnd = false;
 
     public void GameOver()
     {
-        m_result.gameObject.SetActive(true);
-
-        if (m_players[0].m_currentHp > m_players[1].m_currentHp)
-        {
-            m_images[0].gameObject.SetActive(true);
-        }
-        else if (m_players[0].m_currentHp < m_players[1].m_currentHp)
-        {
-            m_images[1].gameObject.SetActive(true);
-        }
-        else
-        {
-            //m_images[0].gameObject.SetActive(true);
-        }
+        m_isGame = false;
+        m_gameEnd = true;
     }
 
     // Start is called before the first frame update
@@ -56,10 +48,9 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CoroutineGameStart(5));
         m_playersObj = m_generataPlayerPor.Generater(m_playercount);
         m_players = new Player[m_playersObj.Length];
-        for(int i = 0; i < m_players.Length; i++)
-        {
-            m_players[i] = m_playersObj[i].GetComponent<Player>();
-        }
+
+        m_players[0] = m_playersObj[0].transform.Find("Player1Controller").GetComponent<Player>();
+        m_players[1] = m_playersObj[1].transform.Find("Player2Controller").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -68,13 +59,15 @@ public class GameManager : MonoBehaviour
         if (m_isGame == true)
         {
             mainTime();
-
-            if (m_isGame == false)
-            {
-                Destroy(m_timerText);
-                StartCoroutine(Coroutineresult(2));
-            }
         }
+
+        if (m_gameEnd == true)
+        {
+            
+            Destroy(m_timerText);
+            Coroutineresult();
+        }
+
     }
 
     IEnumerator CoroutineGameStart(int waitSeconds)
@@ -105,24 +98,30 @@ public class GameManager : MonoBehaviour
         }
         this.m_isGame = true;
 
+        bombGenerater.StartGenerater();
+
         foreach (var item in m_players)
         {
             item.gameObject.GetComponent<Player>().CanMove(true);
         }
     }
 
-    IEnumerator Coroutineresult(int WaitSeconds)
+    void Coroutineresult()
     {
-        for( int i = WaitSeconds; i >= 0; i--)
+        m_result.SetActive(true);
+
+        if (m_players[0].m_currentHp > m_players[1].m_currentHp)
         {
-            yield return new WaitForSeconds(1f);
-
-            if( i == 0)
-            {
-                m_result.gameObject.SetActive(true);
-            }
+            m_images[0].gameObject.SetActive(true);
         }
-
+        else if (m_players[0].m_currentHp < m_players[1].m_currentHp)
+        {
+            m_images[1].gameObject.SetActive(true);
+        }
+        else
+        {
+            m_images[3].gameObject.SetActive(true);
+        }
     }
 
     void mainTime()

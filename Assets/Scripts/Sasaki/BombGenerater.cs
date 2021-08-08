@@ -25,7 +25,7 @@ public class BombGenerater : MonoBehaviour
 
     bool m_bombFlg = false; //アップデート内での制御用フラグ
 
-    private void StartGenerater() //爆弾の初期生成
+    public void StartGenerater() //爆弾の初期生成
     {
         GameObject bombObj;
         
