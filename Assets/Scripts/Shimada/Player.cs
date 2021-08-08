@@ -14,9 +14,9 @@ public enum OperaterState
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float m_maxHp = 10;
-    public float m_currentHp = 10;
-    [SerializeField] float m_damage = 1f;
+    [SerializeField] int m_maxHp = 10;
+    public int m_currentHp = 10;
+    [SerializeField] int m_damage = 1;
     [SerializeField] float m_speed = 5f;
 
     [SerializeField] GameObject m_bulletPrefab = null;
@@ -159,12 +159,16 @@ public class Player : MonoBehaviour
         m_canMove = canMove;
     }
 
-    void Damage(float damageNum)
+    void Damage(int damageNum)
     {
         m_currentHp -= damageNum;
         m_hpBar.value = (float)m_currentHp / m_maxHp;
-
-        if (m_currentHp >= 0)
+        
+        if (m_currentHp <= 0)
+        {
+            StartCoroutine(GameManager.Instance.GameOver());
+        }
+        else
         {
             if (m_currentHp + 1 < m_HPCounts.Length)
             {
@@ -173,10 +177,6 @@ public class Player : MonoBehaviour
             m_HPCounts[(int)m_currentHp].gameObject.SetActive(true);
         }
 
-        if (m_currentHp <= 0)
-        {
-            StartCoroutine(GameManager.Instance.GameOver());
-        }
     }
 
     void UpdateHpBarPosition()

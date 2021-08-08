@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHp: 10
   m_currentHp: 10
-  m_damage: 0.1
+  m_damage: 1
   m_speed: 10
   m_bulletPrefab: {fileID: 4221840060996775801, guid: 45e79572e2ae83b4aa5f02a34dec58de,
     type: 3}
