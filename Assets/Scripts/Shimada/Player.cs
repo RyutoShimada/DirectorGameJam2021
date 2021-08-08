@@ -14,9 +14,9 @@ public enum OperaterState
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] int m_maxHp = 10;
-    public int m_currentHp = 10;
-    [SerializeField] int m_damage = 1;
+    [SerializeField] float m_maxHp = 10;
+    public float m_currentHp = 10;
+    [SerializeField] float m_damage = 0.1f;
     [SerializeField] float m_speed = 5f;
 
     [SerializeField] GameObject m_bulletPrefab = null;
@@ -159,10 +159,10 @@ public class Player : MonoBehaviour
         m_canMove = canMove;
     }
 
-    void Damage(int damageNum)
+    void Damage(float damageNum)
     {
         m_currentHp -= damageNum;
-        m_hpBar.value = (float)m_currentHp / m_maxHp;
+        m_hpBar.value = m_currentHp / m_maxHp;
         
         if (m_currentHp <= 0)
         {

@@ -42,9 +42,17 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
-        yield return new WaitForSeconds(2f);
         m_isGame = false;
-        m_gameEnd = true;
+
+        foreach (var item in m_players)
+        {
+            item.gameObject.GetComponent<Player>().CanMove(false);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        Destroy(m_timerText);
+        Coroutineresult();
     }
 
     // Start is called before the first frame update
@@ -67,13 +75,6 @@ public class GameManager : MonoBehaviour
         {
             mainTime();
         }
-
-        if (m_gameEnd)
-        {
-            Destroy(m_timerText);
-            Coroutineresult();
-        }
-
     }
 
     IEnumerator CoroutineGameStart(int waitSeconds)

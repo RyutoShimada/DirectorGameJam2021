@@ -714,14 +714,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHp: 10
   m_currentHp: 10
-  m_damage: 1
+  m_damage: 0.1
   m_speed: 10
   m_bulletPrefab: {fileID: 3548088316414786472, guid: 51afae0b3dad02a41b9f26746f870118,
     type: 3}
   m_bulletGeneratePos: {fileID: 4546330545184805524}
   m_hpBar: {fileID: 5679366178315180092}
   m_hpBarPos: {fileID: 5679366178315180091}
-  m_hpBarPosDirection: 1.5
+  m_hpBarPosDirection: -1.5
   m_HPCounts:
   - {fileID: 3986692218602483234}
   - {fileID: 4542880214192583738}
