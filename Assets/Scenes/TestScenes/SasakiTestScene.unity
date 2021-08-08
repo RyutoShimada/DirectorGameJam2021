@@ -734,7 +734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1543223278
 Rigidbody2D:
   serializedVersion: 4
@@ -1190,7 +1190,7 @@ PrefabInstance:
     - target: {fileID: 240739067326746345, guid: 304bfafe93243f74bab351f28de0d3e2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 240739067326746347, guid: 304bfafe93243f74bab351f28de0d3e2,
         type: 3}
@@ -1266,6 +1266,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pool
       objectReference: {fileID: 0}
+    - target: {fileID: 3102179902053425381, guid: f0aa3964846041a419582be13092ffdf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0aa3964846041a419582be13092ffdf, type: 3}
 --- !u!1001 &3156968414208540183
@@ -1283,7 +1288,7 @@ PrefabInstance:
     - target: {fileID: 3156968413962454208, guid: ded70866606e0dd4c83ffcb2d403dfd0,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3156968413962454220, guid: ded70866606e0dd4c83ffcb2d403dfd0,
         type: 3}
@@ -1422,7 +1427,7 @@ PrefabInstance:
     - target: {fileID: 4221840060996775801, guid: 45e79572e2ae83b4aa5f02a34dec58de,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4221840061034367800, guid: 45e79572e2ae83b4aa5f02a34dec58de,
         type: 3}
@@ -1456,7 +1461,7 @@ PrefabInstance:
     - target: {fileID: 3548088316414786472, guid: 51afae0b3dad02a41b9f26746f870118,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3548088316414786484, guid: 51afae0b3dad02a41b9f26746f870118,
         type: 3}
