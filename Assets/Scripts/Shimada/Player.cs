@@ -28,30 +28,32 @@ public class Player : MonoBehaviour
 
     public OperaterState m_operater = OperaterState.FirstPlayer;
     Rigidbody2D m_rb2d;
-    Vector2 m_velo;
     Vector2 m_dir;
+    [SerializeField] bool m_canMove;
 
     // Start is called before the first frame update
     void Start()
     {
         m_rb2d = GetComponent<Rigidbody2D>();
-        m_velo = m_rb2d.velocity;
         m_dir = Vector2.up;
         m_currentHp = m_maxHp;
         m_hpBar.value = (float)m_currentHp / m_maxHp;
         m_hpBarPos.position = transform.position + new Vector3(0, m_hpBarPosDirection, 0);
+        m_canMove = false;
     }
 
     void FixedUpdate()
     {
+        if (!m_canMove) return;
         Move();
     }
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        if (!m_canMove) return;
         Fire();
-        m_hpBarPos.position = transform.position + new Vector3(0, m_hpBarPosDirection, 0);
+        UpdateHpBarPosition();
     }
 
     private void Move()
@@ -145,10 +147,24 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// GameManagerから呼ばれる
+    /// </summary>
+    /// <param name="canMove">動けるかどうか</param>
+    public void CanMove(bool canMove)
+    {
+        m_canMove = canMove;
+    }
+
     void Damage(int damageNum)
     {
         m_currentHp -= damageNum;
         m_hpBar.value = (float)m_currentHp / m_maxHp;
+    }
+
+    void UpdateHpBarPosition()
+    {
+        m_hpBarPos.position = transform.position + new Vector3(0, m_hpBarPosDirection, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
