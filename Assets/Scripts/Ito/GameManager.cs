@@ -24,11 +24,11 @@ public class GameManager : MonoBehaviour
     GameObject[] m_playersObj;
     [SerializeField] int m_playercount;
     /// <summary>カウントダウンのイメージ配列 </summary>
-    [SerializeField] Image[] m_images;
+    [SerializeField] GameObject[] m_images;
     /// <summary>リザルトイメージ</summary>
     [SerializeField] GameObject m_result;
 
-    [SerializeField] Image[] m_syousya;
+    [SerializeField] GameObject[] m_syousya;
 
     [SerializeField] BombGenerater bombGenerater;
 
@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
 
         m_players[0] = m_playersObj[0].transform.Find("Player1Controller").GetComponent<Player>();
         m_players[1] = m_playersObj[1].transform.Find("Player2Controller").GetComponent<Player>();
+
+        Instance = this;
     }
 
     // Update is called once per frame
@@ -61,9 +63,8 @@ public class GameManager : MonoBehaviour
             mainTime();
         }
 
-        if (m_gameEnd == true)
+        if (m_gameEnd)
         {
-            
             Destroy(m_timerText);
             Coroutineresult();
         }
@@ -85,8 +86,6 @@ public class GameManager : MonoBehaviour
                 {
                     m_images[i + 1].gameObject.SetActive(false);
                 }
-
-
             }
             else
             {
@@ -112,15 +111,15 @@ public class GameManager : MonoBehaviour
 
         if (m_players[0].m_currentHp > m_players[1].m_currentHp)
         {
-            m_images[0].gameObject.SetActive(true);
+            m_syousya[0].SetActive(true);
         }
         else if (m_players[0].m_currentHp < m_players[1].m_currentHp)
         {
-            m_images[1].gameObject.SetActive(true);
+            m_syousya[1].SetActive(true);
         }
         else
         {
-            m_images[3].gameObject.SetActive(true);
+            m_syousya[3].SetActive(true);
         }
     }
 
