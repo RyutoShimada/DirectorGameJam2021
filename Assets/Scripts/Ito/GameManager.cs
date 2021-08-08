@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] BombGenerater bombGenerater;
 
+    [SerializeField] GameObject m_sokomade;
+
     Player[] m_players;
 
     bool m_gameEnd = false;
@@ -146,6 +148,8 @@ public class GameManager : MonoBehaviour
                 m_seconds = 0;
                 m_isGame = false;
                 Debug.Log("TimeUp!");
+                m_sokomade.SetActive(true);
+                GameOver();
             }
         }
         if (m_timerText != null)

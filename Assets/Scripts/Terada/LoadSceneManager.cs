@@ -44,14 +44,14 @@ public class LoadSceneManager : MonoBehaviour
 
 
 
-    //private void Start()
-    //{
-    //    fadeImage = m_panel.GetComponent<Image>();
+    private void Start()
+    {
+        fadeImage = m_panel.GetComponent<Image>();
 
-    //    alfa = fadeImage.color.a;
+        alfa = fadeImage.color.a;
 
-    //    StartFadeIn();
-    //}
+        StartFadeIn();
+    }
 
     void StartFadeOut()
     {
@@ -105,7 +105,7 @@ public class LoadSceneManager : MonoBehaviour
         m_panel.gameObject.SetActive(true);
         StartFadeOut();
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("MasterTitliScene");
+        SceneManager.LoadScene("MasterTitleScene");
     }
 
 
