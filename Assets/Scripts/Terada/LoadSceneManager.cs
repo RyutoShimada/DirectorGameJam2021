@@ -44,56 +44,57 @@ public class LoadSceneManager : MonoBehaviour
 
 
 
-    private void Start()
+    //private void Start()
+    //{
+    //    fadeImage = m_panel.GetComponent<Image>();
+
+    //    alfa = fadeImage.color.a;
+
+    //    StartFadeIn();
+    //}
+
+    void StartFadeOut()
     {
-        fadeImage = m_panel.GetComponent<Image>();
-
-        //alfa = fadeImage.color.a;
-
-        //StartFadeIn();
+        fadeImage.enabled = true;
+        alfa += fadeSpeed;
+        SetAlpha();
+        if (alfa >= 1)
+        {
+            isFadeOut = false;
+        }
     }
-    //void StartFadeOut()
-    //{
-    //    fadeImage.enabled = true;
-    //    alfa += fadeSpeed;
-    //    SetAlpha();
-    //    if (alfa >= 1)
-    //    {
-    //        isFadeOut = false;
-    //    }
-    //}
 
-    //void StartFadeIn()
-    //{
-    //    alfa -= fadeSpeed;
-    //    SetAlpha();
-    //    if (alfa <= 0)
-    //    {
-    //        isFadeIn = false;
-    //        fadeImage.enabled = false;
-    //    }
-    //}
+    void StartFadeIn()
+    {
+        alfa -= fadeSpeed;
+        SetAlpha();
+        if (alfa <= 0)
+        {
+            isFadeIn = false;
+            fadeImage.enabled = false;
+        }
+    }
 
-    //private void Update()
-    //{
-    //    if (isFadeIn)
-    //    {
-    //        StartFadeIn();
-    //    }
-    //    if (isFadeOut)
-    //    {
-    //        StartFadeOut();
-    //    }
-    //}
+    private void Update()
+    {
+        if (isFadeIn)
+        {
+            StartFadeIn();
+        }
+        if (isFadeOut)
+        {
+            StartFadeOut();
+        }
+    }
 
-    //void SetAlpha()
-    //{
-    //    fadeImage.color = new Color(0, 0, 0, alfa);
-    //}
+    void SetAlpha()
+    {
+        fadeImage.color = new Color(0, 0, 0, alfa);
+    }
 
     IEnumerator StartLoadGameScene()
     {
-        //m_panel.gameObject.SetActive(true);
+        m_panel.gameObject.SetActive(true);
         //StartFadeOut();
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("MasterGameScene");
@@ -101,11 +102,11 @@ public class LoadSceneManager : MonoBehaviour
 
     IEnumerator StartLoadTilteScene()
     {
-        //m_panel.gameObject.SetActive(true);   
-        //StartFadeOut();
+        m_panel.gameObject.SetActive(true);
+        StartFadeOut();
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("MasterTitliScene");
     }
 
-    
+
 }
