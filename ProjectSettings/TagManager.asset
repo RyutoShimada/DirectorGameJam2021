@@ -42,3 +42,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackSky
+    uniqueID: 2775558309
+    locked: 0
+  - name: Grass&Fire
+    uniqueID: 4101462335
+    locked: 0
+  - name: Title
+    uniqueID: 1234564559
+    locked: 0
+  - name: Chara
+    uniqueID: 3276446399
+    locked: 0
